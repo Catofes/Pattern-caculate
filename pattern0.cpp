@@ -215,8 +215,8 @@ int caculate(int inet)//传入网络参数
 	char buffer[20];
 	sprintf(buffer,"%d",inet);
 	string name=buffer;
-	const string tname=name+".txt";
-	const string dname=name+".dat";	
+	const string tname="data/"+name+".txt";
+	const string dname="data/"+name+".dat";	
 	ofstream outputtext (tname.c_str());
 	int nn=0;
 	idata.clear();

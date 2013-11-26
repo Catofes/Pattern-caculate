@@ -24,7 +24,7 @@ void Pal()//set the drawing color
 void draw(int imap,TCanvas* c1){
 
 	ifstream fin;
-	TString name=Form("%s%d%s","../pattern/",imap,".txt");
+	TString name=Form("%s%d%s","data/",imap,".txt");
 	cout<<name.Data()<<endl;
 	fin.open(name);
 	char *header=new char[400];
