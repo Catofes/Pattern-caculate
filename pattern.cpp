@@ -22,6 +22,7 @@
 using namespace std;
 
 ClassImp(solve_data);
+ClassImp(input_sample);
 
 static int n1=2;
 static int n2=2;
@@ -63,7 +64,7 @@ list<input_sample> isample;//输入参数
 int load_data()
 {
 
-	ifstream inputfile("data");
+	ifstream inputfile("parameter");
 	string linshi;
 	//cout<<"OK0";
 	input_sample s;
@@ -240,7 +241,6 @@ int caculate(int inet)//传入网络参数
 
 	TTree *tree=new TTree("T","Program");
 	tree ->Branch("data",&thedata);
-
 	///参数的循环
 	for(plist=isample.begin();plist!=isample.end();plist++)
 	{
@@ -342,10 +342,6 @@ int main()
 		cout<<i<<endl;
 		caculate(i);
 	}
-	//caculate(2);
-//	getchar();
-//	cout<<"OK";
-	getchar();
 	return 0;
 }
 

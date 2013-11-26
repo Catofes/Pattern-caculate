@@ -1,6 +1,7 @@
 #include "TObject.h"
-struct input_sample//输入参数
+class input_sample : public TObject//输入参数
 {
+	public:
 	double t_a;
 	double t_b;
 	double k_1;
@@ -8,6 +9,8 @@ struct input_sample//输入参数
 	double k_3;
 	double k_4;
 	double alpha;
+	input_sample(){}
+	ClassDef(input_sample,1);
 };
 
 
