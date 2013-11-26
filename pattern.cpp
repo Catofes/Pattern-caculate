@@ -15,7 +15,13 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_odeiv.h>
+#include <TTree.h>
+#include <TObject.h>
+#include <TFile.h>
+#include "pattern.h"
 using namespace std;
+
+ClassImp(solve_data);
 
 static int n1=2;
 static int n2=2;
@@ -49,27 +55,10 @@ struct initial
 
 list<initial> iinitial;
 
-struct input_sample//输入参数
-{
-	double t_a;
-	double t_b;
-	double k_1;
-	double k_2;
-	double k_3;
-	double k_4;
-	double alpha;
-};
 
 list<input_sample> isample;//输入参数
 
-struct solve_data
-{
-	int inet;
-	input_sample params;
-	double data[5][800];
-};
-
-list<solve_data> idata;
+//list<solve_data> idata;
 
 int load_data()
 {
@@ -216,10 +205,11 @@ int caculate(int inet)//传入网络参数
 	sprintf(buffer,"%d",inet);
 	string name=buffer;
 	const string tname="data/"+name+".txt";
-	const string dname="data/"+name+".dat";	
+	const string dname="data/"+name+".root";	
 	ofstream outputtext (tname.c_str());
 	int nn=0;
-	idata.clear();
+	//idata.clear();
+	TFile hfile(dname.c_str(),"RECREATE","Program Data");
 	///网络参数计算///
 	int abin=inet%3-1;
 	int about=(inet/3)%3-1;
@@ -247,6 +237,9 @@ int caculate(int inet)//传入网络参数
 	gsl_odeiv_system sys = {func, NULL, 800, params};
 	double t = 0.0, t1 = 100.0;
 	double h = 1e-6;
+
+	TTree *tree=new TTree("T","Program");
+	tree ->Branch("data",&thedata);
 
 	///参数的循环
 	for(plist=isample.begin();plist!=isample.end();plist++)
@@ -331,9 +324,12 @@ int caculate(int inet)//传入网络参数
 			}
 			nn++;
 		}
-		idata.push_back(thedata);
+		//idata.push_back(thedata);
+		tree->Fill();
 	}
 	outputtext.close();
+	hfile.Write();
+	hfile.Close();
 	return 0;
 }
 
