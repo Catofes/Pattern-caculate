@@ -84,7 +84,7 @@ void draw(int imap,TCanvas* c1){
 	//graphB->Draw("COLZ SAME");
 	c1->Update();
 	
-	TString plotName=Form("%s%d%s","../pattern/",imap,"A.bmp");
+	TString plotName=Form("%s%d%s","data/",imap,"A.bmp");
 	c1->Print(plotName);
 	//getchar();
 }
