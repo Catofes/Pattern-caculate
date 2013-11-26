@@ -24,7 +24,6 @@ void Pal()//set the drawing color
 void draw(int imap,TCanvas* c1){
 
 	ifstream fin;
-	//TString name=Form("%s%d%s","D:\\document\\生物物理\\生物物理导论\\细胞凋亡\\本研\\原程序\\pattern0\\pattern0\\",i,".txt");
 	TString name=Form("%s%d%s","../pattern/",imap,".txt");
 	cout<<name.Data()<<endl;
 	fin.open(name);

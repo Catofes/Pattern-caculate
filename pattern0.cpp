@@ -1,4 +1,4 @@
-// pattern0.cpp : ¶¨Òå¿ØÖÆÌ¨Ó¦ÓÃ³ÌĞòµÄÈë¿Úµã¡£
+// pattern0.cpp : å®šä¹‰æ§åˆ¶å°åº”ç”¨ç¨‹åºçš„å…¥å£ç‚¹ã€‚
 //
 //#define _CRT_SECURE_NO_WARNINGS
 //#define _CRT_SECURE_NO_DEPRECATE
@@ -49,7 +49,7 @@ struct initial
 
 list<initial> iinitial;
 
-struct input_sample//ÊäÈë²ÎÊı
+struct input_sample//è¾“å…¥å‚æ•°
 {
 	double t_a;
 	double t_b;
@@ -60,7 +60,7 @@ struct input_sample//ÊäÈë²ÎÊı
 	double alpha;
 };
 
-list<input_sample> isample;//ÊäÈë²ÎÊı
+list<input_sample> isample;//è¾“å…¥å‚æ•°
 
 struct solve_data
 {
@@ -130,12 +130,12 @@ double mystepfunction(double a){
 int func (double t, const double y[], double f[],void *params)
 {	
 	///////////////
-	/*ËµÃ÷
-		paramasÊÇ´«ÈëµÄËùÓĞ²ÎÊı
-		yÊÇ×Ô±äÁ¿£¬¹²ÓĞ2*n*n¸ö800¸ö£¬ÆäÖĞy[2*(x*n+y)]´ú±íA[x][y](´Ó0-19¹²20ĞĞ20ÁĞ)
-		y[2*(x*n+y)+1]´ú±íB[x][y]¡£
-		ÏÂÃæ¹ı³ÌÖĞµÄA_sum¾ØÕóÊÇÖ¸B¶ÔAµÄÓ°Ïì¡£Í¬ÀíB_sum
-		fÊÇ·½³Ì£¬¹²ÓĞ800¸öÃ¿¸öµãÒ»¸ö·½³Ì£¬ÅÅĞòºÍy±£³ÖÒ»ÖÂ¡£
+	/*è¯´æ˜
+		paramasæ˜¯ä¼ å…¥çš„æ‰€æœ‰å‚æ•°
+		yæ˜¯è‡ªå˜é‡ï¼Œå…±æœ‰2*n*nä¸ª800ä¸ªï¼Œå…¶ä¸­y[2*(x*n+y)]ä»£è¡¨A[x][y](ä»0-19å…±20è¡Œ20åˆ—)
+		y[2*(x*n+y)+1]ä»£è¡¨B[x][y]ã€‚
+		ä¸‹é¢è¿‡ç¨‹ä¸­çš„A_sumçŸ©é˜µæ˜¯æŒ‡Bå¯¹Açš„å½±å“ã€‚åŒç†B_sum
+		fæ˜¯æ–¹ç¨‹ï¼Œå…±æœ‰800ä¸ªæ¯ä¸ªç‚¹ä¸€ä¸ªæ–¹ç¨‹ï¼Œæ’åºå’Œyä¿æŒä¸€è‡´ã€‚
 	*/
 	///////////////
 	double abin = *(double *)params;
@@ -193,7 +193,7 @@ int func (double t, const double y[], double f[],void *params)
 		}
 	}
 
-	///ÒÔÏÂÊÇ·½³Ì
+	///ä»¥ä¸‹æ˜¯æ–¹ç¨‹
 	for (int i = 0; i < n*n; ++i)
 	{
 		f[2*i]=(mystepfunction(bain)*mypow(y[2*i+1],n1)+mystepfunction(-bain)*mypow(fk1,n1))/(mypow(y[2*i+1],n1)+mypow(fk1,n1))
@@ -209,9 +209,9 @@ int func (double t, const double y[], double f[],void *params)
 }
 
 
-int caculate(int inet)//´«ÈëÍøÂç²ÎÊı
+int caculate(int inet)//ä¼ å…¥ç½‘ç»œå‚æ•°
 {
-	///ÎÄ¼şÃû///
+	///æ–‡ä»¶å///
 	char buffer[20];
 	sprintf(buffer,"%d",inet);
 	string name=buffer;
@@ -220,26 +220,26 @@ int caculate(int inet)//´«ÈëÍøÂç²ÎÊı
 	ofstream outputtext (tname.c_str());
 	int nn=0;
 	idata.clear();
-	///ÍøÂç²ÎÊı¼ÆËã///
+	///ç½‘ç»œå‚æ•°è®¡ç®—///
 	int abin=inet%3-1;
 	int about=(inet/3)%3-1;
 	int bain=(inet/27)%3-1;
 	int baout=(inet/81)%3-1;
 	outputtext<<"ab    "<<abin<<"	"<<about<<"	"<<"ba    "<<bain<<"	"<<baout<<endl;
-	if(about==0&&baout==0)//Ã»ÓĞ·´À¡µÄÍøÂç
+	if(about==0&&baout==0)//æ²¡æœ‰åé¦ˆçš„ç½‘ç»œ
 	{
 		return 1;
 	}
 	list<input_sample>::iterator plist;
 	list<initial>::iterator ilist;
 
-	double params[9]={0};//¶¨Òå²ÎÊıÁĞ±í
-	double y[800]={0};//½âµÄÖµ£»
-	double y_1[800]={0};//Ç°ÃæÒ»²½µÄ½âµÃÖµ£»
+	double params[9]={0};//å®šä¹‰å‚æ•°åˆ—è¡¨
+	double y[800]={0};//è§£çš„å€¼ï¼›
+	double y_1[800]={0};//å‰é¢ä¸€æ­¥çš„è§£å¾—å€¼ï¼›
 	double delta=0;
 	solve_data thedata;
 	thedata.inet=inet;
-	///Ò»ÏÂgsl ode½â·¨¶¨Òå
+	///ä¸€ä¸‹gsl odeè§£æ³•å®šä¹‰
 	const gsl_odeiv_step_type * T = gsl_odeiv_step_rk8pd;
 	gsl_odeiv_step * s = gsl_odeiv_step_alloc (T, 800);
 	gsl_odeiv_control * c = gsl_odeiv_control_y_new (1e-6, 0.0);
@@ -248,7 +248,7 @@ int caculate(int inet)//´«ÈëÍøÂç²ÎÊı
 	double t = 0.0, t1 = 100.0;
 	double h = 1e-6;
 
-	///²ÎÊıµÄÑ­»·
+	///å‚æ•°çš„å¾ªç¯
 	for(plist=isample.begin();plist!=isample.end();plist++)
 	{
 		outputtext<<"t_a	"<<(*plist).t_a<<"	t_b	"<<(*plist).t_b<<"	k_1	"<<(*plist).k_1<<"	k_2	"<<(*plist).k_2<<"	k_3	"<<(*plist).k_3<<"	k_4	"<<(*plist).k_4<<"	alpha	"<<(*plist).alpha<<endl;
@@ -261,7 +261,7 @@ int caculate(int inet)//´«ÈëÍøÂç²ÎÊı
 		params[6]=(*plist).k_3;
 		params[7]=(*plist).k_4;
 		params[8]=(*plist).alpha;
-		///¶ş½øÖÆ´¢´æparams
+		///äºŒè¿›åˆ¶å‚¨å­˜params
 		thedata.params.alpha=(*plist).alpha;
 		thedata.params.k_1=(*plist).k_1;
 		thedata.params.k_2=(*plist).k_2;
@@ -269,12 +269,12 @@ int caculate(int inet)//´«ÈëÍøÂç²ÎÊı
 		thedata.params.k_4=(*plist).k_4;
 		thedata.params.t_a=(*plist).t_a;
 		thedata.params.t_b=(*plist).t_b;
-		///³õÊ¼ÖµµÄÑ­»·
+		///åˆå§‹å€¼çš„å¾ªç¯
 		nn=0;
 		cout<<"caculate"<<endl;
 		for(ilist=iinitial.begin();ilist!=iinitial.end();ilist++)
 		{
-			///ÔØÈë³õÖµ
+			///è½½å…¥åˆå€¼
 			for (int i = 0; i < 2*n*n; ++i)
 			{
 				y[i]=(*ilist).data[i];
@@ -294,7 +294,7 @@ int caculate(int inet)//´«ÈëÍøÂç²ÎÊı
 					delta+=(y[i]-y_1[i])*(y[i]-y_1[i]);
 				}
 				//if(time==100){
-				//	cout<<"Îó²î"<<delta/(t-told)<<"	"<<t<<endl;
+				//	cout<<"è¯¯å·®"<<delta/(t-told)<<"	"<<t<<endl;
 				//	time=0;
 				//}
 				//cout<<y[0]<<"  "<<y[1]<<endl;
@@ -303,10 +303,10 @@ int caculate(int inet)//´«ÈëÍøÂç²ÎÊı
 				if (delta<deltamax) ;//break;
 				else
 				{
-					memcpy(y_1, y,sizeof(y));//¸´ÖÆyµ½y_1;
+					memcpy(y_1, y,sizeof(y));//å¤åˆ¶yåˆ°y_1;
 				}
 			}
-			outputtext<<"³õÊ¼Öµ:	"<<nn<<endl;
+			outputtext<<"åˆå§‹å€¼:	"<<nn<<endl;
 			outputtext<<"A:"<<endl;
 			for (int i = 0; i < n; ++i)
 			{
