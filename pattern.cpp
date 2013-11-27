@@ -236,7 +236,7 @@ int caculate(int inet)//传入网络参数
 	gsl_odeiv_control * c = gsl_odeiv_control_y_new (1e-6, 0.0);
 	gsl_odeiv_evolve * e = gsl_odeiv_evolve_alloc (800);
 	gsl_odeiv_system sys = {func, NULL, 800, params};
-	double t = 0.0, t1 = 100.0;
+	double t = 0.0, t1 = 10000.0;
 	double h = 1e-6;
 
 	TTree *tree=new TTree("T","Program");
@@ -276,27 +276,31 @@ int caculate(int inet)//传入网络参数
 			double delta=0;
 			int time=0;
 			double told=0;
-			while (t < t1)
+			//while (t < t1)
+			while(1)
 			{
 				time++;
 				int status = gsl_odeiv_evolve_apply (e, c, s,&sys,&t, t1,&h, y);
 				if (status != GSL_SUCCESS) break;
-				delta =0;
-				for (int i = 0; i < 2*n*n; ++i)
-				{
-					delta+=(y[i]-y_1[i])*(y[i]-y_1[i]);
-				}
+				if (time==100){
+					delta=0;
+					for (int i = 0; i < 2*n*n; ++i)
+					{
+						delta+=(y[i]-y_1[i])*(y[i]-y_1[i]);
+					}
 				//if(time==100){
-				//	cout<<"误差"<<delta/(t-told)<<"	"<<t<<endl;
+					cout<<"误差"<<delta/(t-told)<<"	"<<t<<endl;
 				//	time=0;
 				//}
 				//cout<<y[0]<<"  "<<y[1]<<endl;
 				//getchar();
-				told=t;
-				if (delta<deltamax) ;//break;
-				else
-				{
-					memcpy(y_1, y,sizeof(y));//复制y到y_1;
+					told=t;
+					if (delta<deltamax) break;//break;
+					else
+					{
+						memcpy(y_1, y,sizeof(y));//复制y到y_1;
+					}
+					time=0;
 				}
 			}
 			outputtext<<"初始值:	"<<nn<<endl;
