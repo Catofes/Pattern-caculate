@@ -1,6 +1,11 @@
+#include<iostream>
+#include<stdlib.h>
 #include<fstream>
 #include"TCanvas.h"
 #include"TGraph2D.h"
+#include"TColor.h"
+#include"TStyle.h"
+using namespace std;
 void Pal()//set the drawing color
 {
    static Int_t  colors[256];
@@ -29,7 +34,7 @@ void draw(int imap,TCanvas* c1){
 	fin.open(name);
 	char *header=new char[400];
 	for(int ihead=0;ihead<4;ihead++){
-		getline(fin,header);
+		fin.getline(header,400);
 	}
 	Double_t *a=new Double_t[400];
 	Double_t *b=new Double_t[400];
@@ -63,7 +68,7 @@ void draw(int imap,TCanvas* c1){
 	graphA->SetNpy(20);
 	graphA->SetMaximum(1.0001);
 	graphA->SetMinimum(-0.0001);
-	TGraph2D *graphB=new TGraph2D(400,x,y,a);
+	TGraph2D *graphB=new TGraph2D(400,x,y,b);
 	graphB->SetName("B");
 	graphB->SetTitle(name);
 	graphB->SetNpx(20);
@@ -88,7 +93,7 @@ void draw(int imap,TCanvas* c1){
 	c1->Print(plotName);
 	//getchar();
 }
-void main(){
+int main(){
 	TCanvas *c1=new TCanvas("c1","",600,300);
 	//Pal();
 	gStyle->SetPalette(53,0);
