@@ -288,8 +288,8 @@ int caculate(int inet)//传入网络参数
 		thedata.params.t_a=(*plist).t_a;
 		thedata.params.t_b=(*plist).t_b;
 		for(int i=0;i<8;i++){
-			thedata.params.k[i]=(*plist).k[i];
-			thedata.params.n[i]=(*plist).n[i];
+			thedata.k[i]=(*plist).k[i];
+			thedata.n[i]=(*plist).n[i];
 		}
 		///初始值的循环
 		nn=0;
