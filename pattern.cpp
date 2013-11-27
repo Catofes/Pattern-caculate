@@ -82,8 +82,8 @@ int load_data()
 		for(int i=0;i<8;i++){
 			s.n[i]=atof(strtok(NULL,&c));
 		}
-		s.alpha=atof(strtok(kk,&c));
-		s.beta=atof(strtok(kk,&c));
+		s.alpha=atof(strtok(NULL,&c));
+		s.beta=atof(strtok(NULL,&c));
 		isample.push_back(s);
 	}
 	//cout<<"OK2";
