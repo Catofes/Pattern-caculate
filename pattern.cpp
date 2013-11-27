@@ -361,10 +361,12 @@ int caculate(int inet)//传入网络参数
 }
 
 
-int main()
+int main(int argc, char **argv)
 {
 	load_data();
-	for(int i=0;i<81;i++)
+	int start=atoi(argv[1]);
+	int	theend=atoi(argv[2]);
+	for(int i=start;i<theend;i++)
 	{
 		cout<<i<<endl;
 		caculate(i);
