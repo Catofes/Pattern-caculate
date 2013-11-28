@@ -138,7 +138,7 @@ int func (double t, const double y[], double f[],void *params)
 	double aaout = *((double *)params+5);
 	double bbin = *((double *)params+6);
 	double bbout = *((double *)params+7);
-
+/*
 	double fkabin = *((double *)params+8);
 	double fkabout = *((double *)params+9);
 	double fkbain = *((double *)params+10);
@@ -147,7 +147,7 @@ int func (double t, const double y[], double f[],void *params)
 	double fkaaout = *((double *)params+13);
 	double fkbbin = *((double *)params+14);
 	double fkbbout = *((double *)params+15);
-
+*/
 	double fnabin = *((double *)params+16);
 	double fnabout = *((double *)params+17);
 	double fnbain = *((double *)params+18);
@@ -162,6 +162,16 @@ int func (double t, const double y[], double f[],void *params)
 
 	double ft_ainv = 1/(*((double *)params+26));
 	double ft_binv = 1/(*((double *)params+27));
+
+	double knabin=mypow(*((double *)params+8),*((double *)params+16));
+	double knabout=mypow(*((double *)params+9),*((double *)params+17));
+	double knbain=mypow(*((double *)params+10),*((double *)params+18));
+	double knbaout=mypow(*((double *)params+11),*((double *)params+19));
+	double knaain=mypow(*((double *)params+12),*((double *)params+20));
+	double knaaout=mypow(*((double *)params+13),*((double *)params+21));
+	double knbbin=mypow(*((double *)params+14),*((double *)params+22));
+	double knbbout=mypow(*((double *)params+15),*((double *)params+23));
+
 
 	double A_sum[20][20];
 	double B_sum[20][20];
@@ -198,15 +208,21 @@ int func (double t, const double y[], double f[],void *params)
 	for (int i = 0; i < n*n; ++i)
 	{
 
-		f[2*i]=ft_ainv*((msf(bain)*mypow(y[2*i+1],fnbain)+msf(-bain)*mypow(fkbain,fnbain))/(mypow(y[2*i+1],fnbain)+mypow(fkbain,fnbain))
-			*(msf(baout)*mypow(fbeta*B_sum[i/20][i%20],fnbaout)+msf(-baout)*mypow(fkbaout,fnbaout))/(mypow(fbeta*B_sum[i/20][i%20],fnbaout)+mypow(fkbaout,fnbaout))
-			*(msf(aain)*mypow(y[2*i],fnaain)+msf(-aain)*mypow(fkaain,fnaain))/(mypow(y[2*i],fnaain)+mypow(fkaain,fnaain))
-			*(msf(aaout)*mypow(falpha*A_sum[i/20][i%20],fnaaout)+msf(-aaout)*mypow(fkaaout,fnaaout))/(mypow(falpha*A_sum[i/20][i%20],fnaaout)+mypow(fkaaout,fnaaout))-y[2*i]);/////-y[2*i]
-		f[2*i+1]=ft_binv*((msf(abin)*mypow(y[2*i],fnabin)+msf(-abin)*mypow(fkabin,fnabin))/(mypow(y[2*i],fnabin)+mypow(fkabin,fnabin))
+		f[2*i]=ft_ainv*(
+			 (bain==0?1.:bain==1?(1.-knbain/(mypow(y[2*i+1],fnbain)+knbain)):(knbain/(mypow(y[2*i+1],fnbain)+knbain)))
+			*(baout==0?1.:baout==1?(1.-knbaout/(mypow(fbeta*B_sum[i/20][i%20],fnbaout)+knbaout)):(knbaout/(mypow(fbeta*B_sum[i/20][i%20],fnbaout)+knbaout)))
+			*(aain==0?1.:aain==1?(1.-knaain/(mypow(y[2*i],fnaain)+knaain)):(knaain/(mypow(y[2*i],fnaain)+knaain)))
+			*(aaout==0?1.:aaout==1?(1.-knaaout/(mypow(falpha*A_sum[i/20][i%20],fnaaout)+knaaout)):(knaaout/(mypow(falpha*A_sum[i/20][i%20],fnaaout)+knaaout)))-y[2*i]);/////-y[2*i]
+		f[2*i+1]=ft_binv*(
+			 (abin==0?1.:abin==1?(1.-knabin/(mypow(y[2*i],fnabin)+knabin)):(knabin/(mypow(y[2*i],fnabin)+knabin)))
+			*(about==0?1.:about==1?(1.-knabout/(mypow(falpha*A_sum[i/20][i%20],fnabout)+knabout)):(knabout/(mypow(falpha*A_sum[i/20][i%20],fnabout)+knabout)))
+			*(bbin==0?1.:bbin==1?(1.-knbbin/(mypow(y[2*i+1],fnbbin)+knbbin)):(knbbin/(mypow(y[2*i+1],fnbbin)+knbbin)))
+			*(bbout==0?1.:bbout==1?(1.-knbbout/(mypow(fbeta*B_sum[i/20][i%20],fnbbout)+knbbout)):(knbbout/(mypow(fbeta*B_sum[i/20][i%20],fnbbout)+knbbout)))-y[2*i+1]);/////-y[2*i]
+	/*	f[2*i+1]=ft_binv*((msf(abin)*mypow(y[2*i],fnabin)+msf(-abin)*mypow(fkabin,fnabin))/(mypow(y[2*i],fnabin)+mypow(fkabin,fnabin))
 			*(msf(about)*mypow(falpha*A_sum[i/20][i%20],fnabout)+msf(-about)*mypow(fkabout,fnabout))/(mypow(falpha*A_sum[i/20][i%20],fnabout)+mypow(fkabout,fnabout))
 			*(msf(bbin)*mypow(y[2*i+1],fnbbin)+msf(-bbin)*mypow(fkbbin,fnbbin))/(mypow(y[2*i+1],fnbbin)+mypow(fkbbin,fnbbin))
 			*(msf(bbout)*mypow(fbeta*B_sum[i/20][i%20],fnbbout)+msf(-bbout)*mypow(fkbbout,fnbbout))/(mypow(fbeta*B_sum[i/20][i%20],fnbbout)+mypow(fkbbout,fnbbout))-y[2*i+1]);/////-y[2*i+1]
-	}
+*/	}
 	return GSL_SUCCESS;
 }
 
@@ -220,18 +236,17 @@ int caculate(int inet)//传入网络参数
 	const string tname="data/"+name+".txt";
 	const string dname="data/"+name+".root";	
 	ofstream outputtext (tname.c_str());
-	int nn=0;
 	//idata.clear();
 	TFile hfile(dname.c_str(),"RECREATE","Program Data");
 	///网络参数计算///
 	int abin=inet%3-1;
 	int about=(inet/3)%3-1;
-	int bain=(inet/27)%3-1;
-	int baout=(inet/81)%3-1;
-	int aain=(inet/243)%3-1;
-	int aaout=(inet/729)%3-1;
-	int bbin=(inet/2187)%3-1;
-	int bbout=(inet/6561)%3-1;
+	int bain=(inet/9)%3-1;
+	int baout=(inet/27)%3-1;
+	int aain=(inet/81)%3-1;
+	int aaout=(inet/243)%3-1;
+	int bbin=(inet/729)%3-1;
+	int bbout=(inet/2187)%3-1;
 	outputtext<<"ab    "<<abin<<"	"<<about<<"	"<<"ba    "<<bain<<"	"<<baout<<"aa    "<<aain<<"	"<<aaout<<"	"<<"bb    "<<bbin<<"	"<<bbout<<endl;
 	if(about==0&&baout==0&&aaout==0&&bbout==0)//没有反馈的网络
 	{
@@ -255,8 +270,9 @@ int caculate(int inet)//传入网络参数
 	double t = 0.0, t1 = 100000.0;
 	double h = 1e-6;
 
-	TTree *tree=new TTree("T","Program");
-	tree ->Branch("data",&thedata);
+	solve_data *ppp=&thedata;
+	TTree *tree=new TTree("tree","Program");
+	tree ->Branch("thedata",&ppp,128000,1);
 	///参数的循环
 	for(plist=isample.begin();plist!=isample.end();plist++)
 	{
@@ -292,7 +308,6 @@ int caculate(int inet)//传入网络参数
 			thedata.params.n[i]=(*plist).n[i];
 		}
 		///初始值的循环
-		nn=0;
 		cout<<"caculate"<<endl;
 		for(ilist=iinitial.begin();ilist!=iinitial.end();ilist++)
 		{
@@ -327,7 +342,6 @@ int caculate(int inet)//传入网络参数
 					time=0;
 				}
 			}
-			outputtext<<"初始值:	"<<nn<<endl;
 			outputtext<<"A:"<<endl;
 			for (int i = 0; i < n; ++i)
 			{
@@ -348,14 +362,14 @@ int caculate(int inet)//传入网络参数
 			}
 			for (int i = 0; i < 2*n*n; ++i)
 			{
-				thedata.data[nn][i]=y[i];
+				thedata.data[i]=y[i];
 			}
-			nn++;
+			tree->Fill();
 		}
-		tree->Fill();
 	}
 	outputtext.close();
-	hfile.Write();
+	tree->Write();
+	tree->Show();
 	hfile.Close();
 	return 0;
 }

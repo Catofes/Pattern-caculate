@@ -23,7 +23,7 @@ void Pal()//set the drawing color
       return;
    }
    gStyle->SetNumberContours(256);
-   gStyle->SetPalette(200,colors);
+   gStyle->SetPalette(256,colors);
 }
 
 void draw(int imap,TCanvas* c1){
@@ -33,7 +33,7 @@ void draw(int imap,TCanvas* c1){
 	cout<<name.Data()<<endl;
 	fin.open(name);
 	char *header=new char[400];
-	for(int ihead=0;ihead<4;ihead++){
+	for(int ihead=0;ihead<5;ihead++){
 		fin.getline(header,400);
 	}
 	Double_t *a=new Double_t[400];
@@ -89,7 +89,7 @@ void draw(int imap,TCanvas* c1){
 	//graphB->Draw("COLZ SAME");
 	c1->Update();
 	
-	TString plotName=Form("%s%d%s","data/",imap,"A.bmp");
+	TString plotName=Form("%s%d%s","data/",imap,".bmp");
 	c1->Print(plotName);
 	//getchar();
 }
@@ -99,7 +99,7 @@ int main(){
 	gStyle->SetPalette(53,0);
 	gStyle->SetNumberContours(256);
 	c1->Divide(2,1);
-	for(int i=0;i<81;i++){
+	for(int i=3240;i<3321;i++){
 		draw(i,c1);
 	}
 }

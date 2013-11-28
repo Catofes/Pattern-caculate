@@ -17,7 +17,7 @@ class solve_data : public TObject
 	public:
 		int inet;
 		input_sample params;
-		double data[800];
+		double data[5][800];
 		solve_data(){}
 
 		ClassDef(solve_data,2);
