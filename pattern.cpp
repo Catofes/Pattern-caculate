@@ -236,7 +236,6 @@ int caculate(int inet)//传入网络参数
 	const string tname="data/"+name+".txt";
 	const string dname="data/"+name+".root";	
 	ofstream outputtext (tname.c_str());
-	int nn=0;
 	//idata.clear();
 	TFile hfile(dname.c_str(),"RECREATE","Program Data");
 	///网络参数计算///
@@ -271,8 +270,9 @@ int caculate(int inet)//传入网络参数
 	double t = 0.0, t1 = 100000.0;
 	double h = 1e-6;
 
-	TTree *t1=new TTree("t1","Program");
-	t1 ->Branch("data",&thedata);
+	solve_data *ppp=&thedata;
+	TTree *tree=new TTree("tree","Program");
+	tree ->Branch("thedata",&ppp,128000,1);
 	///参数的循环
 	for(plist=isample.begin();plist!=isample.end();plist++)
 	{
@@ -308,7 +308,6 @@ int caculate(int inet)//传入网络参数
 			thedata.params.n[i]=(*plist).n[i];
 		}
 		///初始值的循环
-		nn=0;
 		cout<<"caculate"<<endl;
 		for(ilist=iinitial.begin();ilist!=iinitial.end();ilist++)
 		{
@@ -343,7 +342,6 @@ int caculate(int inet)//传入网络参数
 					time=0;
 				}
 			}
-			outputtext<<"初始值:	"<<nn<<endl;
 			outputtext<<"A:"<<endl;
 			for (int i = 0; i < n; ++i)
 			{
@@ -364,14 +362,14 @@ int caculate(int inet)//传入网络参数
 			}
 			for (int i = 0; i < 2*n*n; ++i)
 			{
-				thedata.data[nn][i]=y[i];
+				thedata.data[i]=y[i];
 			}
-			nn++;
+			tree->Fill();
 		}
-		t1->Fill();
 	}
 	outputtext.close();
-	hfile.Write();
+	tree->Write();
+	tree->Show();
 	hfile.Close();
 	return 0;
 }
