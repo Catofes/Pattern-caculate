@@ -6,7 +6,11 @@ pattern:
 	g++ -c patternDict.cpp -lgsl -lgslcblas `root-config --cflags --libs`
 	g++ pattern.o patternDict.o -o pattern.out -lgsl -lgslcblas `root-config --cflags --libs`
 	g++ drawpattern.cc -o drawpattern.out `root-config --cflags --libs` 
-	rm pattern.o patternDict.o patternDict.cpp
+	rootcint -f ftttestDict.cpp -c ftttest.h ftttestLinkDef.h
+	g++ -c ftttest.cpp -lgsl -lgslcblas `root-config --cflags --libs`
+	g++ -c ftttestDict.cpp -lgsl -lgslcblas `root-config --cflags --libs`
+	g++ ftttest.o ftttestDict.o -o ftttest.out -lgsl -lgslcblas `root-config --cflags --libs`
+	rm pattern.o patternDict.o patternDict.cpp ftttest.o ftttestDict.o ftttestDict.cpp
 clean:
 	rm ./pattern.out 
 	rm ./drawpattern.out
