@@ -10,7 +10,7 @@ pattern:
 	g++ -c ftttest.cpp -lgsl -lgslcblas `root-config --cflags --libs`
 	g++ -c ftttestDict.cpp -lgsl -lgslcblas `root-config --cflags --libs`
 	g++ ftttest.o ftttestDict.o -o ftttest.out -lgsl -lgslcblas `root-config --cflags --libs`
-	rm pattern.o patternDict.o patternDict.cpp ftttest.o ftttestDict.o ftttestDict.cpp
+	rm pattern.o patternDict.o patternDict.cpp patternDict.h ftttest.o ftttestDict.o ftttestDict.cpp ftttestDict.h
 clean:
 	rm ./pattern.out 
 	rm ./drawpattern.out
