@@ -45,8 +45,8 @@ void draw(int imap,TCanvas* c1){
 		double tem=0;
 			fin>>tem;
 			a[iy*20+jx]=tem;
-			x[iy*20+jx]=jx;
-			y[iy*20+jx]=iy;
+			x[iy*20+jx]=jx+0.5;
+			y[iy*20+jx]=iy+0.5;
 		}
 	}
 	
@@ -57,7 +57,8 @@ void draw(int imap,TCanvas* c1){
 		for(int jx=0;jx<20;jx++){
 		double tem=0;
 			fin>>tem;
-			b[iy*20+jx]=tem;
+			//b[iy*20+jx]=tem;
+			b[iy*20+jx]=((iy+jx)%2==1?1:0);
 		}
 	}
 	cout<<imap<<endl;
@@ -99,7 +100,7 @@ int main(){
 	gStyle->SetPalette(53,0);
 	gStyle->SetNumberContours(256);
 	c1->Divide(2,1);
-	for(int i=3240;i<3321;i++){
+	for(int i=3243;i<3244;i++){
 		draw(i,c1);
 	}
 }

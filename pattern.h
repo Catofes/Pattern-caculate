@@ -2,13 +2,13 @@
 class input_sample : public TObject//输入参数
 {
 	public:
-	double t_a;
-	double t_b;
-	double k[8];
-	double n[8];
-	double alpha,beta;
-	input_sample(){}
-	ClassDef(input_sample,1);
+		double t_a;
+		double t_b;
+		double k[8];
+		double n[8];
+		double alpha,beta;
+		input_sample(){}
+		ClassDef(input_sample,1);
 };
 
 
