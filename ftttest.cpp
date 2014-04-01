@@ -19,7 +19,7 @@ ClassImp(input_sample);
 void draw(Double_t *data,int imap, Int_t x=20, Int_t y=20){
 	TCanvas *c1=new TCanvas("c1","",400,400);
 	TH2D *h=new TH2D("h","",x,0,x,y,0,y);
-	for(Int_t i=0;i<x*y;i++){
+	for(Int_t i=1;i<x*y;i++){
 		for(Int_t jhight=0;jhight<data[i]*100;jhight++){
 			h->Fill(i%x+0.5,i/y+0.5);
 		}
@@ -63,7 +63,7 @@ int ftttest(int imap) {
 	  for(unsigned int j=0; j < ny; j++) 
 		f(i,j)=thedata->data[0][2*(20*i+j)];
 
-	Forward2.Shift(f,nx,ny,1);
+	//Forward2.Shift(f,nx,ny,1);
 	Forward2.fft(f);
 	cout<<f<<endl;
 
