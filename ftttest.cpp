@@ -58,12 +58,12 @@ int ftttest(int imap) {
 	array2<Complex> f(nx,ny,align);
 
 	fft2d Forward2(-1,f);
-	fft2d Backward2(1,f);
 
 	for(unsigned int i=0; i < nx; i++) 
 	  for(unsigned int j=0; j < ny; j++) 
-		f(i,j)=thedata->data[0][20*i+j];
+		f(i,j)=thedata->data[0][2*(20*i+j)];
 
+	Forward2.Shift(f,nx,ny,1);
 	Forward2.fft(f);
 	cout<<f<<endl;
 
@@ -72,17 +72,24 @@ int ftttest(int imap) {
 	  for(unsigned int j=0; j < ny; j++) 
 		finish[20*i+j]=sqrt(f(i,j).real()*f(i,j).real()+f(i,j).imag()*f(i,j).imag());
 
-	for(int i=0;i<400;i++)
-	  cout<<finish[i]<<"	";
+	double * old=new double[400];
+	for(int i=0;i<400;i++){
+		//cout<<finish[i]<<"	";
+		old[i]=thedata->data[0][2*i];
+		cout<<old[i]<<"	";
+	}
 
 	draw(finish,imap);
-	drawraw(thedata->data[0],imap);
+	drawraw(old,imap);
 
 }
 
 int main(int argc, char **argv) {
 	int start=atoi(argv[1]);
 	int theend=atoi(argv[2]);
+	gStyle->SetPalette(53,0);
+	gStyle->SetNumberContours(256);
+
 	for(int i=start;i<theend;i++)
 	{   
 		cout<<i<<endl;
