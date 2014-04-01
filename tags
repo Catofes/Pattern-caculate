@@ -1,0 +1,100 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ClassDef	ftttest.h	/^		ClassDef(solve_data,2);$/;"	p	class:solve_data	access:public	signature:(solve_data,2)
+ClassDef	ftttest.h	/^	ClassDef(input_sample,1);$/;"	p	class:input_sample	access:public	signature:(input_sample,1)
+ClassDef	pattern.h	/^		ClassDef(solve_data,2);$/;"	p	class:solve_data	access:public	signature:(solve_data,2)
+ClassDef	pattern.h	/^	ClassDef(input_sample,1);$/;"	p	class:input_sample	access:public	signature:(input_sample,1)
+Pal	drawpattern.cc	/^void Pal()\/\/set the drawing color$/;"	f	signature:()
+T	pattern.cpp	/^static int T=200;$/;"	v	file:
+alpha	ftttest.h	/^	double alpha,beta;$/;"	m	class:input_sample	access:public
+alpha	pattern.h	/^	double alpha,beta;$/;"	m	class:input_sample	access:public
+alphamax	pattern.cpp	/^static double alphamax=2.0;$/;"	v	file:
+alphamin	pattern.cpp	/^static double alphamin=0.0;$/;"	v	file:
+beta	ftttest.h	/^	double alpha,beta;$/;"	m	class:input_sample	access:public
+beta	pattern.h	/^	double alpha,beta;$/;"	m	class:input_sample	access:public
+c	pattern.cpp	/^const char c='\\t';$/;"	v
+caculate	pattern.cpp	/^int caculate(int inet)\/\/传入网络参数$/;"	f	signature:(int inet)
+data	ftttest.h	/^		double data[5][800];$/;"	m	class:solve_data	access:public
+data	pattern.cpp	/^	double data[800];$/;"	m	struct:initial	file:	access:public
+data	pattern.h	/^		double data[800];$/;"	m	class:solve_data	access:public
+deltamax	pattern.cpp	/^static double deltamax=0.0000001;$/;"	v	file:
+draw	drawpattern.cc	/^void draw(int imap,TCanvas* c1){$/;"	f	signature:(int imap,TCanvas* c1)
+ftttest	ftttest.cpp	/^int ftttest() {$/;"	f	signature:()
+func	pattern.cpp	/^int func (double t, const double y[], double f[],void *params)$/;"	f	signature:(double t, const double y[], double f[],void *params)
+iinitial	pattern.cpp	/^list<initial> iinitial;$/;"	v
+inet	ftttest.h	/^		int inet;$/;"	m	class:solve_data	access:public
+inet	pattern.h	/^		int inet;$/;"	m	class:solve_data	access:public
+initial	pattern.cpp	/^struct initial$/;"	s	file:
+initial::data	pattern.cpp	/^	double data[800];$/;"	m	struct:initial	file:	access:public
+input_sample	ftttest.cpp	/^ClassImp(input_sample);$/;"	v
+input_sample	ftttest.h	/^	input_sample(){}$/;"	f	class:input_sample	access:public	signature:()
+input_sample	ftttest.h	/^class input_sample : public TObject\/\/输入参数$/;"	c	inherits:TObject
+input_sample	pattern.cpp	/^ClassImp(input_sample);$/;"	v
+input_sample	pattern.h	/^	input_sample(){}$/;"	f	class:input_sample	access:public	signature:()
+input_sample	pattern.h	/^class input_sample : public TObject\/\/输入参数$/;"	c	inherits:TObject
+input_sample::ClassDef	ftttest.h	/^	ClassDef(input_sample,1);$/;"	p	class:input_sample	access:public	signature:(input_sample,1)
+input_sample::ClassDef	pattern.h	/^	ClassDef(input_sample,1);$/;"	p	class:input_sample	access:public	signature:(input_sample,1)
+input_sample::alpha	ftttest.h	/^	double alpha,beta;$/;"	m	class:input_sample	access:public
+input_sample::alpha	pattern.h	/^	double alpha,beta;$/;"	m	class:input_sample	access:public
+input_sample::beta	ftttest.h	/^	double alpha,beta;$/;"	m	class:input_sample	access:public
+input_sample::beta	pattern.h	/^	double alpha,beta;$/;"	m	class:input_sample	access:public
+input_sample::input_sample	ftttest.h	/^	input_sample(){}$/;"	f	class:input_sample	access:public	signature:()
+input_sample::input_sample	pattern.h	/^	input_sample(){}$/;"	f	class:input_sample	access:public	signature:()
+input_sample::k	ftttest.h	/^	double k[8];$/;"	m	class:input_sample	access:public
+input_sample::k	pattern.h	/^	double k[8];$/;"	m	class:input_sample	access:public
+input_sample::n	ftttest.h	/^	double n[8];$/;"	m	class:input_sample	access:public
+input_sample::n	pattern.h	/^	double n[8];$/;"	m	class:input_sample	access:public
+input_sample::t_a	ftttest.h	/^	double t_a;$/;"	m	class:input_sample	access:public
+input_sample::t_a	pattern.h	/^	double t_a;$/;"	m	class:input_sample	access:public
+input_sample::t_b	ftttest.h	/^	double t_b;$/;"	m	class:input_sample	access:public
+input_sample::t_b	pattern.h	/^	double t_b;$/;"	m	class:input_sample	access:public
+isample	pattern.cpp	/^list<input_sample> isample;\/\/输入参数$/;"	v
+k	ftttest.h	/^	double k[8];$/;"	m	class:input_sample	access:public
+k	pattern.h	/^	double k[8];$/;"	m	class:input_sample	access:public
+kmax	pattern.cpp	/^static double kmax=1.0;$/;"	v	file:
+kmin	pattern.cpp	/^static double kmin=0.01;$/;"	v	file:
+load_data	pattern.cpp	/^int load_data()$/;"	f	signature:()
+main	drawpattern.cc	/^int main(){$/;"	f	signature:()
+main	formsample.c	/^void main(){$/;"	f
+main	ftttest.cpp	/^int main() {$/;"	f	signature:()
+main	pattern.cpp	/^int main(int argc, char **argv)$/;"	f	signature:(int argc, char **argv)
+msf	pattern.cpp	/^double msf(double a){$/;"	f	signature:(double a)
+mypow	pattern.cpp	/^double mypow(double a,double b)$/;"	f	signature:(double a,double b)
+n	ftttest.h	/^	double n[8];$/;"	m	class:input_sample	access:public
+n	pattern.cpp	/^static int n=20;$/;"	v	file:
+n	pattern.h	/^	double n[8];$/;"	m	class:input_sample	access:public
+n1	pattern.cpp	/^static int n1=2;$/;"	v	file:
+n2	pattern.cpp	/^static int n2=2;$/;"	v	file:
+n3	pattern.cpp	/^static int n3=2;$/;"	v	file:
+n4	pattern.cpp	/^static int n4=2;$/;"	v	file:
+ndim	pattern.cpp	/^static double ndim=6;$/;"	v	file:
+nnet	pattern.cpp	/^static int nnet=81;$/;"	v	file:
+nset	pattern.cpp	/^static int nset=100;$/;"	v	file:
+params	ftttest.h	/^		input_sample params;$/;"	m	class:solve_data	access:public
+params	pattern.h	/^		input_sample params;$/;"	m	class:solve_data	access:public
+randomtime	pattern.cpp	/^static int randomtime=5;$/;"	v	file:
+sigma	pattern.cpp	/^static double sigma=0.02;$/;"	v	file:
+solve_data	ftttest.h	/^		solve_data(){}$/;"	f	class:solve_data	access:public	signature:()
+solve_data	ftttest.h	/^class solve_data : public TObject$/;"	c	inherits:TObject
+solve_data	pattern.h	/^		solve_data(){}$/;"	f	class:solve_data	access:public	signature:()
+solve_data	pattern.h	/^class solve_data : public TObject$/;"	c	inherits:TObject
+solve_data::ClassDef	ftttest.h	/^		ClassDef(solve_data,2);$/;"	p	class:solve_data	access:public	signature:(solve_data,2)
+solve_data::ClassDef	pattern.h	/^		ClassDef(solve_data,2);$/;"	p	class:solve_data	access:public	signature:(solve_data,2)
+solve_data::data	ftttest.h	/^		double data[5][800];$/;"	m	class:solve_data	access:public
+solve_data::data	pattern.h	/^		double data[800];$/;"	m	class:solve_data	access:public
+solve_data::inet	ftttest.h	/^		int inet;$/;"	m	class:solve_data	access:public
+solve_data::inet	pattern.h	/^		int inet;$/;"	m	class:solve_data	access:public
+solve_data::params	ftttest.h	/^		input_sample params;$/;"	m	class:solve_data	access:public
+solve_data::params	pattern.h	/^		input_sample params;$/;"	m	class:solve_data	access:public
+solve_data::solve_data	ftttest.h	/^		solve_data(){}$/;"	f	class:solve_data	access:public	signature:()
+solve_data::solve_data	pattern.h	/^		solve_data(){}$/;"	f	class:solve_data	access:public	signature:()
+t_a	ftttest.h	/^	double t_a;$/;"	m	class:input_sample	access:public
+t_a	pattern.h	/^	double t_a;$/;"	m	class:input_sample	access:public
+t_b	ftttest.h	/^	double t_b;$/;"	m	class:input_sample	access:public
+t_b	pattern.h	/^	double t_b;$/;"	m	class:input_sample	access:public
+tmax	pattern.cpp	/^static double tmax=10.0;$/;"	v	file:
+tmin	pattern.cpp	/^static double tmin=0.1;$/;"	v	file:
