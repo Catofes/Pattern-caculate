@@ -15,6 +15,8 @@
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_matrix.h>
 #include <gsl/gsl_odeiv.h>
+#include <gsl/gsl_fft_real.h>
+#include <gsl/gsl_fft_halfcomplex.h>
 #include <TTree.h>
 #include <TObject.h>
 #include <TFile.h>
@@ -218,14 +220,37 @@ int func (double t, const double y[], double f[],void *params)
 			*(about==0?1.:about==1?(1.-knabout/(mypow(falpha*A_sum[i/20][i%20],fnabout)+knabout)):(knabout/(mypow(falpha*A_sum[i/20][i%20],fnabout)+knabout)))
 			*(bbin==0?1.:bbin==1?(1.-knbbin/(mypow(y[2*i+1],fnbbin)+knbbin)):(knbbin/(mypow(y[2*i+1],fnbbin)+knbbin)))
 			*(bbout==0?1.:bbout==1?(1.-knbbout/(mypow(fbeta*B_sum[i/20][i%20],fnbbout)+knbbout)):(knbbout/(mypow(fbeta*B_sum[i/20][i%20],fnbbout)+knbbout)))-y[2*i+1]);/////-y[2*i]
-	/*	f[2*i+1]=ft_binv*((msf(abin)*mypow(y[2*i],fnabin)+msf(-abin)*mypow(fkabin,fnabin))/(mypow(y[2*i],fnabin)+mypow(fkabin,fnabin))
-			*(msf(about)*mypow(falpha*A_sum[i/20][i%20],fnabout)+msf(-about)*mypow(fkabout,fnabout))/(mypow(falpha*A_sum[i/20][i%20],fnabout)+mypow(fkabout,fnabout))
-			*(msf(bbin)*mypow(y[2*i+1],fnbbin)+msf(-bbin)*mypow(fkbbin,fnbbin))/(mypow(y[2*i+1],fnbbin)+mypow(fkbbin,fnbbin))
-			*(msf(bbout)*mypow(fbeta*B_sum[i/20][i%20],fnbbout)+msf(-bbout)*mypow(fkbbout,fnbbout))/(mypow(fbeta*B_sum[i/20][i%20],fnbbout)+mypow(fkbbout,fnbbout))-y[2*i+1]);/////-y[2*i+1]
-*/	}
+	}
 	return GSL_SUCCESS;
 }
 
+double* fftresult(double *data, int n){
+	cout<<"fft started!"<<endl;
+	double *freqspace=new double[n*n];
+	//for(int i=0;i<n*n;i++){freqspace[i]=data[i];}
+	cout<<"alloced data space"<<endl;
+	for(int i=0;i<n;i++){
+	gsl_fft_real_wavetable *real;
+	gsl_fft_halfcomplex_wavetable *hc;
+	gsl_fft_real_workspace *work;
+	//	double *row=new double[n];
+	double row[20];//need to be changed into n!!! 
+	cout<<"row[20]"<<endl;
+	for(int j=0;j<n;j++){row[j]=data[i*n+j];}
+	work = gsl_fft_real_workspace_alloc (n);
+	real = gsl_fft_real_wavetable_alloc (n);
+	cout<<"alloced workspace"<<endl;
+	gsl_fft_real_transform (row, 1, n, real, work);
+	cout<<"transformed"<<endl;
+	gsl_fft_real_wavetable_free (real);
+	for(int j=0;j<n;j++){freqspace[i*n+j]=row[j];}
+	//	delete[] row;
+	cout<<"fft done!"<<endl;
+	//gsl_fft_real_workspace_free (work);
+	cout<<"free workspace"<<endl;
+	}
+	return freqspace;
+}
 
 int caculate(int inet)//传入网络参数
 {
@@ -365,6 +390,21 @@ int caculate(int inet)//传入网络参数
 				thedata.data[i]=y[i];
 			}
 			tree->Fill();
+			///fft
+			outputtext<<"ArowFFT:"<<endl;
+			double *fft;
+			double Arow1[400];
+			for(int i=0;i<n*n;i++){Arow1[i]=y[i];}
+			fft=fftresult(Arow1,n);
+			for (int i = 0; i < n; ++i)
+			{
+				for (int j = 0; j < n; ++j)
+				{
+					outputtext<<fft[2*(i*n+j)+1]<<"	";
+				}
+				outputtext<<endl;
+			}
+			
 		}
 	}
 	outputtext.close();
@@ -373,7 +413,6 @@ int caculate(int inet)//传入网络参数
 	hfile.Close();
 	return 0;
 }
-
 
 int main(int argc, char **argv)
 {
