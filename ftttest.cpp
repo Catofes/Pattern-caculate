@@ -35,7 +35,7 @@ void draw(Double_t *data,int imap, Int_t x=20, Int_t y=20){
 	h->SetStats(kFALSE);
 	h->SetMaximum(101);
 	h->SetMinimum(0);
-	for(Int_t i=0;i<x*y;i++){
+	for(Int_t i=1;i<x*y;i++){
 		for(Int_t jhight=0;jhight<data[i]*100;jhight++){
 			h->Fill(i%x+0.5,i/y+0.5);
 		}
@@ -84,12 +84,11 @@ cout<<"1"<<endl;
 	array2<Complex> f(nx,ny,align);
 
 	fft2d Forward2(-1,f);
-	fft2d Backward2(1,f);
-cout<<"2"<<endl;
 	for(unsigned int i=0; i < nx; i++) 
 	  for(unsigned int j=0; j < ny; j++) 
-		f(i,j)=thedata->data[0][20*i+j];
+		f(i,j)=thedata->data[0][2*(20*i+j)];
 
+	//Forward2.Shift(f,nx,ny,1);
 	Forward2.fft(f);
 	cout<<f<<endl;
 
@@ -98,17 +97,23 @@ cout<<"2"<<endl;
 	  for(unsigned int j=0; j < ny; j++) 
 		finish[20*i+j]=sqrt(f(i,j).real()*f(i,j).real()+f(i,j).imag()*f(i,j).imag());
 
-	for(int i=0;i<400;i++)
-	  cout<<finish[i]<<"	";
+	double * old=new double[400];
+	for(int i=0;i<400;i++){
+		//cout<<finish[i]<<"	";
+		old[i]=thedata->data[0][2*i];
+		cout<<old[i]<<"	";
+	}
 
 	draw(finish,imap);
-	drawraw(thedata->data[0],imap);
-return 0;
+	drawraw(old,imap);
 }
 
 int main(int argc, char **argv) {
 	int start=atoi(argv[1]);
 	int theend=atoi(argv[2]);
+	gStyle->SetPalette(53,0);
+	gStyle->SetNumberContours(256);
+
 	for(int i=start;i<theend;i++)
 	{   
 		cout<<i<<endl;
