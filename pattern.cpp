@@ -320,6 +320,7 @@ int caculate(int inet)//传入网络参数
 			double delta=0;
 			int time=0;
 			double told=0;
+			t=0;
 			//while (t < t1)
 			while(1)
 			{
