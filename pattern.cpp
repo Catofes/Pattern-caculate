@@ -324,6 +324,7 @@ int caculate(int inet)//传入网络参数
 			//while (t < t1)
 			while(1)
 			{
+				if(t>50000)break;
 				time++;
 				int status = gsl_odeiv_evolve_apply (e, c, s,&sys,&t, t1,&h, y);
 				if (status != GSL_SUCCESS) break;
