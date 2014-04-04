@@ -1,4 +1,6 @@
 *.out
 *.o
 data/*
-
+*.root
+*.bmp
+data*/*
