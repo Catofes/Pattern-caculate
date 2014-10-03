@@ -235,7 +235,7 @@ int caculate(int inet)//传入网络参数
 	string name=buffer;
 	const string tname="data/"+name+".txt";
 	const string dname="data/"+name+".root";	
-	ofstream outputtext (tname.c_str());
+	//ofstream //outputtext (tname.c_str());
 	//idata.clear();
 	TFile hfile(dname.c_str(),"RECREATE","Program Data");
 	///网络参数计算///
@@ -247,7 +247,7 @@ int caculate(int inet)//传入网络参数
 	int aaout=(inet/243)%3-1;
 	int bbin=(inet/729)%3-1;
 	int bbout=(inet/2187)%3-1;
-	outputtext<<"ab    "<<abin<<"	"<<about<<"	"<<"ba    "<<bain<<"	"<<baout<<"aa    "<<aain<<"	"<<aaout<<"	"<<"bb    "<<bbin<<"	"<<bbout<<endl;
+	//outputtext<<"ab    "<<abin<<"	"<<about<<"	"<<"ba    "<<bain<<"	"<<baout<<"aa    "<<aain<<"	"<<aaout<<"	"<<"bb    "<<bbin<<"	"<<bbout<<endl;
 	if(about==0&&baout==0&&aaout==0&&bbout==0)//没有反馈的网络
 	{
 		return 1;
@@ -276,12 +276,12 @@ int caculate(int inet)//传入网络参数
 	///参数的循环
 	for(plist=isample.begin();plist!=isample.end();plist++)
 	{
-		outputtext<<"t_a	"<<(*plist).t_a<<"	t_b	"<<(*plist).t_b<<endl;
-		outputtext<<"kabin  "<<(*plist).k[0]<<"  kabout	"<<(*plist).k[1]<<"	 kbain	"<<(*plist).k[2]<<"	kbaout	"<<(*plist).k[3];
-		outputtext<<"	kaain  "<<(*plist).k[4]<<"	 kaaout	"<<(*plist).k[5]<<"	 kbbin	"<<(*plist).k[6]<<"	kbbout	"<<(*plist).k[7];
-		outputtext<<"	nabin  "<<(*plist).n[0]<<"  nabout	"<<(*plist).n[1]<<"	 nbain	"<<(*plist).n[2]<<"	nbaout	"<<(*plist).n[3];
-		outputtext<<"	naain  "<<(*plist).n[4]<<"	 naaout	"<<(*plist).n[5]<<"	 nbbin	"<<(*plist).n[6]<<"	nbbout	"<<(*plist).n[7];
-		outputtext<<"	alpha	"<<(*plist).alpha<<"beta  "<<(*plist).beta<<endl;
+		//outputtext<<"t_a	"<<(*plist).t_a<<"	t_b	"<<(*plist).t_b<<endl;
+		//outputtext<<"kabin  "<<(*plist).k[0]<<"  kabout	"<<(*plist).k[1]<<"	 kbain	"<<(*plist).k[2]<<"	kbaout	"<<(*plist).k[3];
+		//outputtext<<"	kaain  "<<(*plist).k[4]<<"	 kaaout	"<<(*plist).k[5]<<"	 kbbin	"<<(*plist).k[6]<<"	kbbout	"<<(*plist).k[7];
+		//outputtext<<"	nabin  "<<(*plist).n[0]<<"  nabout	"<<(*plist).n[1]<<"	 nbain	"<<(*plist).n[2]<<"	nbaout	"<<(*plist).n[3];
+		//outputtext<<"	naain  "<<(*plist).n[4]<<"	 naaout	"<<(*plist).n[5]<<"	 nbbin	"<<(*plist).n[6]<<"	nbbout	"<<(*plist).n[7];
+		//outputtext<<"	alpha	"<<(*plist).alpha<<"beta  "<<(*plist).beta<<endl;
 		params[0]=(double)abin;
 		params[1]=(double)about;
 		params[2]=(double)bain;
@@ -349,23 +349,23 @@ int caculate(int inet)//传入网络参数
 					time=0;
 				}
 			}
-			outputtext<<"A:"<<endl;
+			//outputtext<<"A:"<<endl;
 			for (int i = 0; i < n; ++i)
 			{
 				for (int j = 0; j < n; ++j)
 				{
-					outputtext<<y[2*(i*n+j)]<<"	";
+					//outputtext<<y[2*(i*n+j)]<<"	";
 				}
-				outputtext<<endl;
+				//outputtext<<endl;
 			}
-			outputtext<<"B:"<<endl;
+			//outputtext<<"B:"<<endl;
 			for (int i = 0; i < n; ++i)
 			{
 				for (int j = 0; j < n; ++j)
 				{
-					outputtext<<y[2*(i*n+j)+1]<<"	";
+					//outputtext<<y[2*(i*n+j)+1]<<"	";
 				}
-				outputtext<<endl;
+				//outputtext<<endl;
 			}
 			for (int i = 0; i < 2*n*n; ++i)
 			{
@@ -374,7 +374,7 @@ int caculate(int inet)//传入网络参数
 			tree->Fill();
 		}
 	}
-	outputtext.close();
+	//outputtext.close();
 	tree->Write();
 	tree->Show();
 	hfile.Close();
